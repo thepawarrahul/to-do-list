@@ -1,5 +1,11 @@
 API endpoints
 
-/registerUser => {
+POST => /registerUser => {
     username, password.
+}
+
+GET => /login?username =>
+{
+    username,
+    id
 }
