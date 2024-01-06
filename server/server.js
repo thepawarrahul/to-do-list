@@ -6,7 +6,7 @@ const server = express()
 const serverPort = process.env.SERVER_PORT || 4000;
 
 server.get('/', function (req, res) {
-  res.send('Hello World')
+  res.send('To do list server')
 })
 
 console.log('Starting server on PORT : '+serverPort);
