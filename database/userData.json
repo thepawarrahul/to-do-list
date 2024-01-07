@@ -8,7 +8,7 @@
         "id": 1704618559351,
         "task": "This is task from thunder client 1",
         "date": "2024-07-01",
-        "isDone": false
+        "isDone": true
       },
       {
         "id": 1704618566507,

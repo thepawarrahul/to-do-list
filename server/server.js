@@ -118,5 +118,30 @@ server.get('/getTasks', async(req, res) => {
     res.send(tasksToReturn);
 });
 
+// API end point to mark task as done.
+// POST reques with username and taskId.
+server.post('/closeTask', async(req, res) => {
+    const usernameFromUri = req.body.username;
+    const taskIdFromUri = req.body.taskId;
+
+    const userData = await fs.readFile(userDataFileLocation, 'utf8');
+    const userDataJson = JSON.parse(userData);
+
+    userDataJson.forEach((user) => {
+        if (user.username === usernameFromUri) {
+            user.task.forEach((task) => {
+                if (task.id === taskIdFromUri) {
+                    console.log('Taks found ...');
+                    task.isDone = true
+                }
+            });
+        }
+    });
+    
+    await fs.writeFile(userDataFileLocation, JSON.stringify(userDataJson, null, 2));
+
+    res.send({ message : "Task Updated."});
+});
+
 console.log('Starting server on PORT : '+serverPort);
 server.listen(serverPort);
