@@ -55,5 +55,37 @@ server.get('/login', async (req, res) => {
     res.json({ id: result[0].id, username: result[0].username });
 });
 
+// API end point to add new task.
+// Date format 2024-01-07
+// Returns the success response.
+server.post('/createTask', async (req, res) => {
+    const username = req.body.username;
+    const task = req.body.task;
+    const taskDate = req.body.date;
+
+    //TO-DO
+    // Add validation for username, task and date.
+
+    const userData = await fs.readFile(userDataFileLocation, 'utf8');
+    const userDataJson = JSON.parse(userData);
+
+    const taskData = {
+        id : new Date().getTime(),
+        task : task,
+        date : taskDate
+    }
+
+    userDataJson.forEach((user) => {
+        if (user.username === username) {
+            console.log('User Found...');
+            user.task.push(taskData);
+        }
+    });
+
+    await fs.writeFile(userDataFileLocation, JSON.stringify(userDataJson, null, 2));
+
+    res.send({ message : "Task Added Successfully."});
+});
+
 console.log('Starting server on PORT : '+serverPort);
 server.listen(serverPort);

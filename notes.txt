@@ -9,3 +9,10 @@ GET => /login?username =>
     username,
     id
 }
+
+POST => /createTask
+{
+    username,
+    taskName,
+    date
+}
