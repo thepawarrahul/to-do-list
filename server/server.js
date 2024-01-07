@@ -72,7 +72,8 @@ server.post('/createTask', async (req, res) => {
     const taskData = {
         id : new Date().getTime(),
         task : task,
-        date : taskDate
+        date : taskDate,
+        isDone : false
     }
 
     userDataJson.forEach((user) => {
@@ -85,6 +86,36 @@ server.post('/createTask', async (req, res) => {
     await fs.writeFile(userDataFileLocation, JSON.stringify(userDataJson, null, 2));
 
     res.send({ message : "Task Added Successfully."});
+});
+
+// API end point to get task for user.
+// Request contains username, date
+// List of Tasks with task data.
+server.get('/getTasks', async(req, res) => {
+    const usernameFromUri = req.query.username;
+    const taskDateFromUri = req.query.date;
+
+    const userData = await fs.readFile(userDataFileLocation, 'utf8');
+    const userDataJson = JSON.parse(userData);
+
+    const tasksToReturn = [];
+    
+    userDataJson.forEach((user) => {
+        if (user.username === usernameFromUri) {
+            user.task.forEach((task) => {
+                if (task.date === taskDateFromUri) {
+                    tasksToReturn.push({
+                        id : task.id,
+                        task : task.task,
+                        date : task.date,
+                        isDone : task.isDone
+                    });
+                }
+            });
+        }
+    });
+
+    res.send(tasksToReturn);
 });
 
 console.log('Starting server on PORT : '+serverPort);
