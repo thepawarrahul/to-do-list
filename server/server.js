@@ -42,7 +42,17 @@ server.post('/registerUser', async (req, res) => {
 server.get('/login', async (req, res) => {
     const usernameFromUri = req.query.username;
     
-    res.json({ usernameFromUri });
+    const userData = await fs.readFile(userDataFileLocation, 'utf8');
+    const userDataJson = JSON.parse(userData);
+
+    const result = userDataJson.filter((user) => user.username === usernameFromUri);
+
+    if (result.length === 0) {
+        res.status(400).json({ message: `User Not found with username ${usernameFromUri}` });
+        return;
+    }
+
+    res.json({ id: result[0].id, username: result[0].username });
 });
 
 console.log('Starting server on PORT : '+serverPort);
