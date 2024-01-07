@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1704618551029,
+    "username": "apiUser",
+    "active": true,
+    "task": [
+      {
+        "id": 1704618559351,
+        "task": "This is task from thunder client 1",
+        "date": "2024-07-01",
+        "isDone": true
+      },
+      {
+        "id": 1704618566507,
+        "task": "This is task from thunder client 2",
+        "date": "2024-07-02",
+        "isDone": false
+      },
+      {
+        "id": 1704618574538,
+        "task": "This is task from thunder client 3",
+        "date": "2024-07-01",
+        "isDone": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+API endpoints
+
+POST => /registerUser => {
+    username, password.
+}
+
+GET => /login?username =>
+{
+    username,
+    id
+}
+
+POST => /createTask
+{
+    username,
+    taskName,
+    date
+}
