@@ -25,6 +25,7 @@ const ToDo = () => {
         <input 
           type='text' 
           placeholder="task"
+          value={taskToAdd}
           onChange={handleTaskAddChange}
         />
       </div>
