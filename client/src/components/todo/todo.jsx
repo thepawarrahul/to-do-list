@@ -19,6 +19,12 @@ const ToDo = () => {
     setTaskToAdd("");
   };
 
+  const taskCompleated = (id) => {
+    setTasks(tasks.map(task => 
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+  };
+
   return (
     <>
       <div>
@@ -35,10 +41,12 @@ const ToDo = () => {
       <div>
         <ul style={{ listStyleType: 'none' }}>
           {tasks.map((task) => (
-            <li key={task.id}>
+            <li key={task.id} style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
               <input
                 type="checkbox"
                 checked={task.completed}
+                onChange={() => taskCompleated(task.id)}
+                disabled={task.completed}
               />
               {task.task}
             </li>
