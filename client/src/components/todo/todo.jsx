@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-const ToDo = () => {
+const ToDo = ({ username, userId }) => {
+  console.log('User name in todo component : '+username);
+  console.log('User id in todo component : '+userId);
+  
   const [tasks, setTasks] = useState([]);
   const [taskToAdd, setTaskToAdd] = useState("");
 

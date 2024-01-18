@@ -1,6 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 import fs from 'fs/promises';
+import cors from 'cors';
 
 const userDataFileLocation = './database/userData.json';
 
@@ -8,6 +9,7 @@ const server = express();
 const serverPort = process.env.SERVER_PORT || 4000;
 
 server.use(express.json());
+server.use(cors());
 
 server.get('/' ,(req, res) => {
     res.send('To do list server');
@@ -48,7 +50,7 @@ server.get('/login', async (req, res) => {
     const result = userDataJson.filter((user) => user.username === usernameFromUri);
 
     if (result.length === 0) {
-        res.status(400).json({ message: `User Not found with username ${usernameFromUri}` });
+        res.send({ message: `User Not found with username ${usernameFromUri}` });
         return;
     }
 

@@ -4,19 +4,26 @@ import ToDo from "../todo/todo";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setuserId] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
 
-  const handleLoginButtonClick = () => {
-    if (username === 'abc') {
+  const handleLoginButtonClick = async () => {
+    const response = await fetch(`http://localhost:4000/login?username=${username}`);
+    const jsonResponse = await response.json();
+    
+    if ('id' in jsonResponse) {
       setIsLoggedIn(true);
+      setuserId(jsonResponse.id);
+    } else {
+      alert(jsonResponse.message);
     }
   }; 
 
   if (isLoggedIn) {
-    return <ToDo />;
+    return <ToDo username={username} userId={userId}/>;
   }
 
   return (
