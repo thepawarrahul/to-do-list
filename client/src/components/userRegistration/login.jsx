@@ -41,22 +41,20 @@ const Login = () => {
       <Row>
         <Col md={12} className="mx-auto">
           <Form>
-            
-              <Form.Control
-                className="border border-primary"
-                type="text" 
-                placeholder="Username" 
-                value={username}
-                onChange={handleUsernameChange}
-              />
-              <Form.Control
-                className="mt-2 border border-primary"
-                type="password" 
-                placeholder="Password" 
-                value={[password]}
-                onChange={handlePasswordChange}
-              />
-            
+            <Form.Control
+              className="border border-primary"
+              type="text" 
+              placeholder="Username" 
+              value={username}
+              onChange={handleUsernameChange}
+            />
+            <Form.Control
+              className="mt-2 border border-primary"
+              type="password" 
+              placeholder="Password" 
+              value={[password]}
+              onChange={handlePasswordChange}
+            />
             <Button 
               variant="primary"
               onClick={handleLoginButtonClick}
